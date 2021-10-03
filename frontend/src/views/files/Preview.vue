@@ -167,7 +167,7 @@ export default {
       listing: null,
       name: "",
       subtitles: [],
-      fullSize: false,
+      fullSize: true,
       showNav: true,
       navTimeout: null,
       hoverNav: false,

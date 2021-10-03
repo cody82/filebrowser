@@ -21,7 +21,7 @@
     </div>
 
     <div>
-      <p class="name">{{ name }}</p>
+      <p class="name"><a :href="fileUrl()">{{ name }}</a></p>
 
       <p v-if="isDir" class="size" data-order="-1">&mdash;</p>
       <p v-else class="size" :data-order="humanSize()">{{ humanSize() }}</p>
@@ -110,6 +110,14 @@ export default {
         return moment(this.modified).format("L LT");
       }
       return moment(this.modified).fromNow();
+    },
+    fileUrl: function () {
+      const path = this.url.replace(/^\/files\//, "");
+
+      // reload the image when the file is replaced
+      const key = Date.parse(this.modified);
+
+      return `${baseURL}/api/raw/${path}?k=${key}&inline=true`;
     },
     dragStart: function () {
       if (this.selectedCount === 0) {
